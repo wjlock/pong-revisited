@@ -64,6 +64,30 @@ class Ball {
 let playerHuman = new Paddle(15, 350, 'slategrey',10 ,100)
 let playerComputer = new  Paddle(875, 350, 'slategrey', 10, 100)
 let ball = new Ball(450,390,'slategrey',12,12)
-playerHuman.render()
-playerComputer.render()
-ball.render()
+// playerHuman.render()
+// playerComputer.render()
+// ball.render()
+
+document.getElementById('play-button').addEventListener('click', function() {
+    playerComputer.render()
+    playerHuman.render()
+    ball.render()
+})
+
+document.addEventListener('keypress', function(evt) {
+    if (evt.key === "w") {
+        playerHuman.y -= 30
+    } else if (evt.key === "s") {
+        playerHuman.y += 30
+    }
+
+
+})
+
+function rePaint() {
+    ctx.clearRect(0,0,game.width,game.height);
+    playerHuman.render();
+    playerComputer.render();
+    ball.render();
+}
+setInterval(rePaint, 5)

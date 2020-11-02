@@ -17,3 +17,6 @@ body {
 main {
     grid-area: game;
 }
+#play-button {
+    cursor: pointer;
+}
