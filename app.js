@@ -38,6 +38,8 @@ class Paddle {
         this.color = color
         this.width = width
         this.height = height
+        this.x_speed = 0;
+        this.y_speed = 0;
     }
     render() {
         ctx.fillStyle = this.color
@@ -48,16 +50,19 @@ class Paddle {
 //constructor for ball
 
 class Ball {
-    constructor(x, y, color, width, height) {
+    constructor(x, y, color) {
         this.x = x
         this.y = y
         this.color = color
-        this.width = width
-        this.height = height
+        this.x_speed = -3
+        this.y_speed = 0
+        this.raidus = 7
     }
     render() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.raidus, 2 * Math.PI, false)
         ctx.fillStyle = this.color
-        ctx.fillRect(this.x, this.y, this.width, this.height)
+        ctx.fill();
     }
 }
 
@@ -89,5 +94,27 @@ function rePaint() {
     playerHuman.render();
     playerComputer.render();
     ball.render();
+    requestAnimationFrame(rePaint)
+    detectWallCollisionHuman()
+    ball.update()
 }
-setInterval(rePaint, 5)
+requestAnimationFrame(rePaint)
+
+
+function detectWallCollisionHuman() {
+    if(playerHuman.y <= 0) {
+        playerHuman.y = 0
+    } else if(playerHuman.y >= 700) {
+        playerHuman.y = 700
+    }
+
+
+}
+let update = function() {
+    ball.update();
+};
+
+ball.update = function() {
+    this.x += this.x_speed;
+    this.y += this.y_speed;
+};
