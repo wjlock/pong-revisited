@@ -1,0 +1,16 @@
+#container {
+    background-color: darkslategrey;
+}
+canvas {
+    background-color: #42c8f5;
+    height: 800px;
+    width: 900px;
+    margin: auto;
+}
+body {
+    padding-top: 1em;
+    text-align: center;
+    background-color: peachpuff;
+    background-size: cover;
+    background-repeat: space;
+  }
