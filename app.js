@@ -23,6 +23,11 @@ const ctx = game.getContext('2d')
 // ctx.lineWidth = 5;
 // ctx.fillRect(875,350,10,100)
 
+// //testing rect buildout - ball
+// ctx.fillStyle = 'slategrey'
+// ctx.lineWidth = 5;
+// ctx.fillRect(450,380,12,12)
+
 
 //constructor for paddles (player and AI)
 
@@ -40,7 +45,25 @@ class Paddle {
     }
 }
 
+//constructor for ball
+
+class Ball {
+    constructor(x, y, color, width, height) {
+        this.x = x
+        this.y = y
+        this.color = color
+        this.width = width
+        this.height = height
+    }
+    render() {
+        ctx.fillStyle = this.color
+        ctx.fillRect(this.x, this.y, this.width, this.height)
+    }
+}
+
 let playerHuman = new Paddle(15, 350, 'slategrey',10 ,100)
 let playerComputer = new  Paddle(875, 350, 'slategrey', 10, 100)
+let ball = new Ball(450,390,'slategrey',12,12)
 playerHuman.render()
 playerComputer.render()
+ball.render()
