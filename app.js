@@ -1,6 +1,7 @@
 
 
 const game = document.querySelector('#game');
+let gameStatus = false;
 
 
 
@@ -11,23 +12,6 @@ const width = computedStyle.width;
 game.height = height.replace('px', "");
 game.width = width.replace('px', "");
 const ctx = game.getContext('2d')
-
-
-// //testing rect buildout - player paddle
-// ctx.fillStyle = 'slategrey'
-// ctx.lineWidth = 5;
-// ctx.fillRect(25,350,10,100)
-
-// //testing rect buildout - computer paddle
-// ctx.fillStyle = 'slategrey'
-// ctx.lineWidth = 5;
-// ctx.fillRect(875,350,10,100)
-
-// //testing rect buildout - ball
-// ctx.fillStyle = 'slategrey'
-// ctx.lineWidth = 5;
-// ctx.fillRect(450,380,12,12)
-
 
 //constructor for paddles (player and AI)
 
@@ -50,19 +34,19 @@ class Paddle {
 //constructor for ball
 
 class Ball {
-    constructor(x, y, color) {
+    constructor(x, y, color, height, width) {
         this.x = x
         this.y = y
         this.color = color
-        this.x_speed = -3
+        this.width = width
+        this.height = height
+        this.x_speed = -6
         this.y_speed = 0
-        this.raidus = 7
     }
     render() {
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.raidus, 2 * Math.PI, false)
         ctx.fillStyle = this.color
-        ctx.fill();
+        ctx.fillRect(this.x, this.y, this.width, this.height)
+
     }
 }
 
@@ -97,6 +81,9 @@ function rePaint() {
     requestAnimationFrame(rePaint)
     detectWallCollisionHuman()
     ball.update()
+    detectPaddleHitPlayer()
+    detectPaddleHitComputer()
+    computerAI()
 }
 requestAnimationFrame(rePaint)
 
@@ -110,6 +97,17 @@ function detectWallCollisionHuman() {
 
 
 }
+
+function detectWallCollisionComputer() {
+    if(playerComputer.y <= 0) {
+        playerComputer.y = 0
+    } else if(playerComputer.y >= 700) {
+        playerComputer.y = 700
+    }
+
+
+}
+
 let update = function() {
     ball.update();
 };
@@ -118,3 +116,39 @@ ball.update = function() {
     this.x += this.x_speed;
     this.y += this.y_speed;
 };
+
+// function detectPaddleHitPlayer() {
+//     if(ball.x <= playerHuman.x + playerHuman.width) {
+//         ball.x_speed = -ball.x_speed
+//     }
+// }
+function detectPaddleHitComputer() {
+    let collisionPointBottom = playerComputer.y + playerComputer.height/2
+    let collisionPointTop = playerComputer.y - playerComputer.height/2
+    let ballPos = ball.y
+    if(ball.x >= playerComputer.x
+        && ballPos < collisionPointBottom
+        && ballPos > collisionPointTop) {
+        ball.x_speed = -ball.x_speed
+    }
+}
+
+
+function detectPaddleHitPlayer() {
+    let collisionPointBottom = playerHuman.y + playerHuman.height/2
+    let collisionPointTop = playerHuman.y - playerHuman.height/2
+    let ballPos = ball.y
+    if(ball.x <= playerHuman.x
+        && ballPos < collisionPointBottom
+        && ballPos > collisionPointTop) {
+        ball.x_speed = -ball.x_speed
+    }
+}
+
+// automation for computer paddle
+// have computer paddle follow the y position of the ball
+
+function computerAI() {
+    playerComputer.y = ball.y - ball.height
+    
+}
