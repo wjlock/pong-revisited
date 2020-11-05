@@ -50,9 +50,9 @@ class Ball {
     }
 }
 
-let playerHuman = new Paddle(15, 350, 'slategrey',10 ,100)
-let playerComputer = new  Paddle(875, 350, 'slategrey', 10, 100)
-let ball = new Ball(350,450,'slategrey',12,12)
+let playerHuman = new Paddle(15, 300, 'slategrey',10 ,100)
+let playerComputer = new  Paddle(685, 300, 'slategrey', 10, 100)
+let ball = new Ball(350,300,'slategrey',12,12)
 // playerHuman.render()
 // playerComputer.render()
 // ball.render()
@@ -84,6 +84,7 @@ function rePaint() {
     detectPaddleHitPlayer()
     detectPaddleHitComputer()
     computerAI()
+    console.log(ball.y)
 }
 requestAnimationFrame(rePaint)
 
@@ -135,14 +136,15 @@ function detectPaddleHitComputer() {
 
 
 function detectPaddleHitPlayer() {
-    let collisionPointBottom = playerHuman.y + playerHuman.height/2
-    let collisionPointTop = playerHuman.y - playerHuman.height/2
+    let collisionPointBottom = playerHuman.y + playerHuman.height
+    let collisionPointTop = playerHuman.y
     let ballPos = ball.y
     if(ball.x <= playerHuman.x
-        && ballPos < collisionPointBottom
-        && ballPos > collisionPointTop) {
+        && ballPos <= collisionPointBottom
+        && ballPos >= collisionPointTop) {
         ball.x_speed = -ball.x_speed
     }
+    console.log(collisionPointBottom)
 }
 
 // automation for computer paddle
