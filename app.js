@@ -52,7 +52,7 @@ class Ball {
 
 let playerHuman = new Paddle(15, 350, 'slategrey',10 ,100)
 let playerComputer = new  Paddle(875, 350, 'slategrey', 10, 100)
-let ball = new Ball(450,390,'slategrey',12,12)
+let ball = new Ball(350,450,'slategrey',12,12)
 // playerHuman.render()
 // playerComputer.render()
 // ball.render()
