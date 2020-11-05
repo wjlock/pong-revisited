@@ -50,9 +50,9 @@ class Ball {
     }
 }
 
-let playerHuman = new Paddle(15, 300, 'slategrey',10 ,100)
-let playerComputer = new  Paddle(685, 300, 'slategrey', 10, 100)
-let ball = new Ball(350,300,'slategrey',12,12)
+let playerHuman = new Paddle(15, 250, 'slategrey',10 ,100)
+let playerComputer = new  Paddle(675, 250, 'slategrey', 10, 100)
+let ball = new Ball(350,294,'slategrey',12,12)
 // playerHuman.render()
 // playerComputer.render()
 // ball.render()
@@ -65,9 +65,9 @@ document.getElementById('play-button').addEventListener('click', function() {
 
 document.addEventListener('keypress', function(evt) {
     if (evt.key === "w") {
-        playerHuman.y -= 30
+        playerHuman.y -= 10
     } else if (evt.key === "s") {
-        playerHuman.y += 30
+        playerHuman.y += 10
     }
 
 
@@ -84,7 +84,6 @@ function rePaint() {
     detectPaddleHitPlayer()
     detectPaddleHitComputer()
     computerAI()
-    console.log(ball.y)
 }
 requestAnimationFrame(rePaint)
 
@@ -144,14 +143,13 @@ function detectPaddleHitPlayer() {
         && ballPos >= collisionPointTop) {
         ball.x_speed = -ball.x_speed
     }
-    console.log(collisionPointBottom)
 }
 
 // automation for computer paddle
 // have computer paddle follow the y position of the ball
 
 function computerAI() {
-    playerComputer.y = ball.y - ball.height
+    playerComputer.y = ball.y -40
     
 }
 function checkForPointComputer() {

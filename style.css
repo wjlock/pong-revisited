@@ -1,11 +1,54 @@
 #container {
-    background-color: darkslategrey;
+max-width: 50em;
+/* height: 70vh; */
+background-color: rgb(111, 12, 32);
+margin: 0 auto;
+padding: 1em;
+display: grid;
+grid-gap: 1em;
+grid-template-rows: .25fr .5fr .25fr;
+grid-template-columns: .25fr .5fr .25fr;
+grid-template-areas:    "player-score player-score computer-score"
+                        "game game game"
+                        "how-to-play play-button play-button";
 }
+    
+#player-score, #computer-score, #how-to-play, #play-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #222;
+}
+    
+#player-score {
+    grid-area: top-left;
+}
+    
+#computer-score {
+    grid-area: top-right;
+
+}
+
+
+#how-to-play {
+    grid-area: btm-left;
+    
+}
+      
+#play-button {
+    grid-area: btm-right;
+       
+}
+ 
+    
+
+
 canvas {
     background-color: #42c8f5;
     height: 600px;
     width: 700px;
     margin: auto;
+    border: 1px solid red;
 }
 body {
     padding-top: 1em;
