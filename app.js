@@ -41,7 +41,7 @@ class Ball {
         this.width = width
         this.height = height
         this.x_speed = -6
-        this.y_speed = 0
+        this.y_speed = 2
     }
     render() {
         ctx.fillStyle = this.color
@@ -65,9 +65,9 @@ document.getElementById('play-button').addEventListener('click', function() {
 
 document.addEventListener('keypress', function(evt) {
     if (evt.key === "w") {
-        playerHuman.y -= 10
+        playerHuman.y -= 20
     } else if (evt.key === "s") {
-        playerHuman.y += 10
+        playerHuman.y += 20
     }
 
 
@@ -84,6 +84,7 @@ function rePaint() {
     detectPaddleHitPlayer()
     detectPaddleHitComputer()
     computerAI()
+    detectBallBounce()
 }
 requestAnimationFrame(rePaint)
 
@@ -130,6 +131,7 @@ function detectPaddleHitComputer() {
         && ballPos <= collisionPointBottom
         && ballPos >= collisionPointTop) {
         ball.x_speed = -ball.x_speed
+        ball.y_speed = -ball.y_speed
     }
 }
 
@@ -160,5 +162,10 @@ function checkForPointComputer() {
 function checkForPointHuman() {
     if(ball.x < 696) {
         
+    }
+}
+function detectBallBounce() {
+    if(ball.y <= 0 || ball.y >= 588) {
+        ball.y_speed = -ball.y_speed
     }
 }
