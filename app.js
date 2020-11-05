@@ -124,12 +124,12 @@ ball.update = function() {
 //     }
 // }
 function detectPaddleHitComputer() {
-    let collisionPointBottom = playerComputer.y + playerComputer.height/2
-    let collisionPointTop = playerComputer.y - playerComputer.height/2
+    let collisionPointBottom = playerComputer.y + playerComputer.height
+    let collisionPointTop = playerComputer.y
     let ballPos = ball.y
     if(ball.x >= playerComputer.x
-        && ballPos < collisionPointBottom
-        && ballPos > collisionPointTop) {
+        && ballPos <= collisionPointBottom
+        && ballPos >= collisionPointTop) {
         ball.x_speed = -ball.x_speed
     }
 }
@@ -153,4 +153,14 @@ function detectPaddleHitPlayer() {
 function computerAI() {
     playerComputer.y = ball.y - ball.height
     
+}
+function checkForPointComputer() {
+    if(ball.x < 10) {
+
+    }
+}
+function checkForPointHuman() {
+    if(ball.x < 696) {
+        
+    }
 }
