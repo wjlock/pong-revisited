@@ -1,48 +1,25 @@
 #container {
-max-width: 50em;
-/* height: 70vh; */
-background-color: rgb(111, 12, 32);
-margin: 0 auto;
-padding: 1em;
-display: grid;
-grid-gap: 1em;
-grid-template-rows: .25fr .5fr .25fr;
-grid-template-columns: .25fr .5fr .25fr;
-grid-template-areas:    "player-score player-score computer-score"
-                        "game game game"
-                        "how-to-play play-button play-button";
-}
+    max-width: 50em;
+    /* height: 70vh; */
+    background-color: rgb(111, 12, 32);
+    margin: 0 auto;
+    padding: 1em;
+    display: grid;
+    grid-gap: 1em;
+    grid-template-rows: .25fr .5fr .25fr;
+    grid-template-columns: .25fr .5fr .25fr;
+    grid-template-areas: "top-left top-left top-right"
+                          "game game game"
+                          "btm-left btm-right btm-right";
+    }
     
-#player-score, #computer-score, #how-to-play, #play-button {
-    display: flex;
+#computer-score, #how-to-play, #play-button, .popup {
+    display: inline-flex;
     justify-content: center;
     align-items: center;
-    background-color: #222;
+    background-color: #42c8f5;
 }
     
-#player-score {
-    grid-area: top-left;
-}
-    
-#computer-score {
-    grid-area: top-right;
-
-}
-
-
-#how-to-play {
-    grid-area: btm-left;
-    
-}
-      
-#play-button {
-    grid-area: btm-right;
-       
-}
- 
-    
-
-
 canvas {
     background-color: #42c8f5;
     height: 600px;
@@ -74,7 +51,7 @@ main {
   .popup .popuptext {
     visibility: hidden;
     width: 160px;
-    background-color: #555;
+    background-color: #42c8f5;
     color: #fff;
     text-align: center;
     border-radius: 6px;
@@ -95,7 +72,7 @@ main {
     margin-left: -5px;
     border-width: 5px;
     border-style: solid;
-    border-color: #555 transparent transparent transparent;
+    border-color: #42c8f5;
   }
   
   /* Toggle this class when clicking on the popup container (hide and show the popup) */

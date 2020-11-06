@@ -4,6 +4,9 @@ let playerScore = 0;
 let computerScore = 0;
 const playerScoreDisplay = document.getElementById("player-score");
 const computerScoreDisplay = document.getElementById("computer-score");
+const playButton = document.getElementById('play-button');
+
+playButton.addEventListener('click',)
 
 // syncing canvas's internal height/width
 const computedStyle = getComputedStyle(game);
@@ -40,8 +43,8 @@ class Ball {
     this.color = color;
     this.width = width;
     this.height = height;
-    this.x_speed = -6;
-    this.y_speed = 2;
+    this.x_speed = 0;
+    this.y_speed = 0;
   }
   render() {
     ctx.fillStyle = this.color;
@@ -103,14 +106,14 @@ function detectWallCollisionComputer() {
   }
 }
 
-let update = function () {
-  ball.update();
-};
+// let update = function () {
+//   ball.update();
+// };
 
-ball.update = function () {
-  this.x += this.x_speed;
-  this.y += this.y_speed;
-};
+// ball.update = function () {
+//   this.x += this.x_speed;
+//   this.y += this.y_speed;
+// };
 
 // function detectPaddleHitPlayer() {
 //     if(ball.x <= playerHuman.x + playerHuman.width) {
@@ -127,7 +130,7 @@ function detectPaddleHitComputer() {
     ballPos >= collisionPointTop
   ) {
     ball.x_speed = -ball.x_speed;
-    ball.y_speed = -ball.y_speed;
+    // ball.y_speed = -ball.y_speed;
   }
 }
 
@@ -140,7 +143,7 @@ function detectPaddleHitPlayer() {
     ballPos <= collisionPointBottom &&
     ballPos >= collisionPointTop
   ) {
-    ball.x_speed = -ball.x_speed;
+    ball.x_speed = -ball.x_speed -playerHuman.x_speed;
   }
 }
 
@@ -186,4 +189,9 @@ function detectBallBounce() {
 function howToPlay() {
   var popup = document.getElementById("myPopup");
   popup.classList.toggle("show");
+}
+
+function startGame() {
+  ball.y_speed
+  ball.x_speed
 }
