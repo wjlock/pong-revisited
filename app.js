@@ -6,7 +6,7 @@ const playerScoreDisplay = document.getElementById("player-score");
 const computerScoreDisplay = document.getElementById("computer-score");
 const playButton = document.getElementById('play-button');
 
-playButton.addEventListener('click',)
+// playButton.addEventListener('click',)
 
 // syncing canvas's internal height/width
 const computedStyle = getComputedStyle(game);
@@ -35,7 +35,6 @@ class Paddle {
 }
 
 //constructor for ball
-
 class Ball {
   constructor(x, y, color, height, width) {
     this.x = x;
@@ -65,7 +64,7 @@ let ball = new Ball(350, 294, "slategrey", 12, 12);
 //     ball.render()
 // })
 
-document.addEventListener("keypress", function (evt) {
+document.addEventListener("keydown", function (evt) {
   if (evt.key === "w") {
     playerHuman.y -= 20;
   } else if (evt.key === "s") {
@@ -81,7 +80,6 @@ function rePaint() {
   requestAnimationFrame(rePaint);
   detectWallCollisionHuman();
   detectWallCollisionComputer();
-  ball.update();
   detectPaddleHitPlayer();
   detectPaddleHitComputer();
   computerAI();
