@@ -14,8 +14,16 @@
             <canvas id='game'></canvas>
         </main>
     </div>
-    <h2>Player Score:</h2><h2>0</h2 id='player-score'>
-    <h2>Computer Score:</h2><h2 id='computer-score'>0</h2>
+    <div class="scores">
+        <div class="score-player">
+            <h2>Player Score: </h2><h2> 0 </h2 id='player-score'>
+        </div>
+        <div class="score-computer">
+            <h2>Computer Score: </h2><h2 id='computer-score'>0</h2>
+        </div>
+    </div>
+
+    
     <div class="popup" onclick="howToPlay()">How to Play
         <span class="popuptext" id="myPopup">The goal of the game is to score points by not allowing your opponent to return the ball. Line the paddle up with the ball to return a serve. The game is played as a best of 7, so first to accumulate 4 points wins!</span>
       </div>

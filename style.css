@@ -13,7 +13,7 @@
                           "btm-left btm-right btm-right";
     }
     
-#computer-score, #how-to-play, #play-button, .popup {
+#how-to-play, #play-button, .popup {
     display: inline-flex;
     justify-content: center;
     align-items: center;
@@ -103,3 +103,19 @@ main {
     from {opacity: 0;}
     to {opacity:1 ;}
   }
+.score-player {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+
+}
+.scores {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+
+}
+.score-computer {
+    display: flex;
+    justify-content: center;
+    padding: 10px;

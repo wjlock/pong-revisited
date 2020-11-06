@@ -6,7 +6,9 @@ const playerScoreDisplay = document.getElementById("player-score");
 const computerScoreDisplay = document.getElementById("computer-score");
 const playButton = document.getElementById('play-button');
 
-// playButton.addEventListener('click',)
+// playButton.addEventListener('click', startGame);
+
+
 
 // syncing canvas's internal height/width
 const computedStyle = getComputedStyle(game);
@@ -26,7 +28,7 @@ class Paddle {
     this.width = width;
     this.height = height;
     this.x_speed = 0;
-    this.y_speed = 0;
+    this.y_speed = 1;
   }
   render() {
     ctx.fillStyle = this.color;
@@ -66,9 +68,9 @@ let ball = new Ball(350, 294, "slategrey", 12, 12);
 
 document.addEventListener("keydown", function (evt) {
   if (evt.key === "w") {
-    playerHuman.y -= 20;
+    playerHuman.y -= 25;
   } else if (evt.key === "s") {
-    playerHuman.y += 20;
+    playerHuman.y += 25;
   }
 });
 
@@ -85,6 +87,8 @@ function rePaint() {
   computerAI();
   detectBallBounce();
   checkForPointComputer();
+  checkWinComputer();
+  ball.update()
 }
 requestAnimationFrame(rePaint);
 
@@ -104,14 +108,14 @@ function detectWallCollisionComputer() {
   }
 }
 
-// let update = function () {
-//   ball.update();
-// };
+let update = function () {
+  ball.update();
+};
 
-// ball.update = function () {
-//   this.x += this.x_speed;
-//   this.y += this.y_speed;
-// };
+ball.update = function () {
+  this.x += this.x_speed;
+  this.y += this.y_speed;
+};
 
 // function detectPaddleHitPlayer() {
 //     if(ball.x <= playerHuman.x + playerHuman.width) {
@@ -153,7 +157,7 @@ function computerAI() {
 }
 function checkForPointComputer() {
   if (ball.x <= 0) {
-    computerScore = +1;
+    computerScore++;
     ball.y = 294;
     ball.x = 350;
     cNumber = computerScoreDisplay.innerHTML
@@ -189,7 +193,18 @@ function howToPlay() {
   popup.classList.toggle("show");
 }
 
-function startGame() {
-  ball.y_speed
-  ball.x_speed
+// function startGame() {
+//   ball.y_speed = -3
+//   ball.x_speed = -6
+// }
+
+function checkWinComputer() {
+  if (computerScore = 4) {
+    gameStatus = false;
+    computerScore = 0;
+    playerScore = 0;
+    // computerScoreDisplay.innerHTML = 0;
+    // playerScoreDisplay.innerHTML = 0;
+    console.log(computerScore);
+  }
 }
