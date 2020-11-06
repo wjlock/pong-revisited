@@ -182,3 +182,8 @@ function detectBallBounce() {
 // increment score by one until a player reaches 4 points, then reset game,
 // Add how to play and play buttons
 // additional styling
+
+function howToPlay() {
+  var popup = document.getElementById("myPopup");
+  popup.classList.toggle("show");
+}
