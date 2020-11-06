@@ -2,9 +2,8 @@ const game = document.querySelector("#game");
 let gameStatus = false;
 let playerScore = 0;
 let computerScore = 0;
-let playerScoreDisplay = document.getElementById("player-score");
+const playerScoreDisplay = document.getElementById("player-score");
 const computerScoreDisplay = document.getElementById("computer-score");
-console.log(computerScoreDisplay);
 
 // syncing canvas's internal height/width
 const computedStyle = getComputedStyle(game);
@@ -156,13 +155,21 @@ function checkForPointComputer() {
     computerScore = +1;
     ball.y = 294;
     ball.x = 350;
+    cNumber = computerScoreDisplay.innerHTML
+    cNumber++;
+    computerScoreDisplay.innerHTML = cNumber;
   }
-  computerScoreDisplay.textContent = "1";
+  
 }
+
 function checkForPointHuman() {
   if (ball.x < 696) {
     playerScore = +1;
     ball.y = 294;
+    ball.x = 350;
+    pNumber = playerScoreDisplay.innerHTML
+    pNumber++;
+    playerScoreDisplay.innerHTML = pNumber;
   }
 }
 function detectBallBounce() {
@@ -170,3 +177,8 @@ function detectBallBounce() {
     ball.y_speed = -ball.y_speed;
   }
 }
+
+
+// increment score by one until a player reaches 4 points, then reset game,
+// Add how to play and play buttons
+// additional styling
