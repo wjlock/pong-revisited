@@ -2,8 +2,8 @@ const game = document.querySelector("#game");
 let gameStatus = false;
 let playerScore = 0;
 let computerScore = 0;
-const playerScoreDisplay = document.getElementById("player-score");
-const computerScoreDisplay = document.getElementById("computer-score");
+const playerScoreDisplay = document.getElementById('player-score');
+const computerScoreDisplay = document.getElementById('computer-score');
 const playButton = document.getElementById('play-button');
 
 // playButton.addEventListener('click', startGame);
@@ -44,8 +44,8 @@ class Ball {
     this.color = color;
     this.width = width;
     this.height = height;
-    this.x_speed = 0;
-    this.y_speed = 0;
+    this.x_speed = -6;
+    this.y_speed = -3;
   }
   render() {
     ctx.fillStyle = this.color;
@@ -99,6 +99,8 @@ function detectWallCollisionHuman() {
     playerHuman.y = 500;
   }
 }
+
+//try to consolidate these two functions
 
 function detectWallCollisionComputer() {
   if (playerComputer.y <= 0) {
@@ -203,8 +205,16 @@ function checkWinComputer() {
     gameStatus = false;
     computerScore = 0;
     playerScore = 0;
-    // computerScoreDisplay.innerHTML = 0;
-    // playerScoreDisplay.innerHTML = 0;
+    computerScoreDisplay.innerHTML = 0;
+    playerScoreDisplay.innerHTML = 0;
     console.log(computerScore);
   }
 }
+// use set timeout for delay
+
+
+
+
+
+
+
