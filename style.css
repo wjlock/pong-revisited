@@ -28,6 +28,7 @@ h2 {
 }
 h1 {
     font-family: 'Indie Flower', cursive;
+    font-size: 50px;
 }
     
 canvas {
@@ -40,7 +41,7 @@ canvas {
 body {
     padding-top: 1em;
     text-align: center;
-    background-color: peachpuff;
+    background-image: url("https://368464.smushcdn.com/1461475/wp-content/uploads/2019/09/Tennis-Court.jpg?lossy=1&strip=1&webp=1");
     background-size: cover;
     background-repeat: space;
   }
@@ -50,22 +51,25 @@ main {
 #play-button {
     cursor: pointer;
     font-family: 'Indie Flower', cursive;
-    border: solid 1px slategray;
+    border: solid 2px black;
     border-radius: .5em;
+    color: whitesmoke;
 }
 #reset-button {
     cursor: pointer;
     font-family: 'Indie Flower', cursive;
-    border: solid 1px slategray;
+    border: solid 2px black;
     border-radius: .5em;
+    color: whitesmoke;
 }
 /* Popup container */
 .popup {
     position: relative;
     display: inline-block;
     cursor: pointer;
-    border: solid 1px slategray;
+    border: solid 2px black;
     border-radius: .5em;
+    color: whitesmoke;
   }
   
   /* The actual popup (appears on top) */
@@ -82,30 +86,13 @@ main {
     z-index: 1;
     bottom: 370px;
     left: 82%;
-    margin-left: -150px;
+    margin-left: -110px;
   }
-  
-  /* Popup arrow */
-  /* .popup .popuptext::after {
-    content: "";
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    bottom: 50px;
-    margin-left: -5px;
-    border-width: 5px;
-    border-style: solid;
-    border-color: #42c8f5;
-  } */
-  
-  /* Toggle this class when clicking on the popup container (hide and show the popup) */
   .popup .show {
     visibility: visible;
     -webkit-animation: fadeIn .5s;
     animation: fadeIn .5s
   }
-  
-  /* Add animation (fade in the popup) */
   @-webkit-keyframes fadeIn {
     from {opacity: 0;}
     to {opacity: 1;}
@@ -125,6 +112,7 @@ main {
     display: flex;
     justify-content: center;
     padding: 5px;
+    color: whitesmoke;
 
 }
 .score-computer {
@@ -133,6 +121,6 @@ main {
     padding: 10px;
 }
 .status {
-    color: crimson;
+    color: whitesmoke;
     font-weight: bolder;
 }
