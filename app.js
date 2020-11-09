@@ -87,8 +87,7 @@ function rePaint() {
   detectPaddleHitComputer();
   computerAI();
   detectBallBounce();
-  checkForPointHuman();
-  checkForPointComputer();
+  checkForPoint();
   checkWin();
   ball.updateBall();
   playerHuman.update();
@@ -172,7 +171,7 @@ function computerAI() {
   }
 }
 
-function checkForPointComputer() {
+function checkForPoint() {
   if (ball.x <= 0) {
     ball.y = 294;
     ball.x = 350;
@@ -189,9 +188,6 @@ function checkForPointComputer() {
       return;
     }
   }
-}
-
-function checkForPointHuman() {
   if (ball.x >= 696) {
     ball.y = 294;
     ball.x = 350;

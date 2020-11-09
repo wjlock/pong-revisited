@@ -1,18 +1,3 @@
-#container {
-    max-width: 50em;
-    /* height: 70vh; */
-    background-color: rgb(111, 12, 32);
-    margin: 0 auto;
-    padding: 1em;
-    display: grid;
-    grid-gap: 1em;
-    grid-template-rows: .25fr .5fr .25fr;
-    grid-template-columns: .25fr .5fr .25fr;
-    grid-template-areas: "top-left top-left top-right"
-                          "game game game"
-                          "btm-left btm-right btm-right";
-    }
-    
 #how-to-play, #play-button, #reset-button, .popup {
     display: inline-flex;
     justify-content: center;
