@@ -93,10 +93,12 @@ function rePaint() {
   detectPaddleHitComputer();
   computerAI();
   detectBallBounce();
+  checkForPointHuman();
   checkForPointComputer();
-  checkWinComputer();
+  checkWin();
   ball.updateBall()
   playerHuman.update()
+  // playerComputer.updateComputer()
 }
 requestAnimationFrame(rePaint);
 
@@ -135,6 +137,14 @@ playerHuman.update = function () {
   this.y += this.y_speed;
 };
 
+// let updateComputer = function () {
+//   playerComputer.updateComputer()
+// }
+// playerComputer.updateComputer = function() {
+//   this.x += this.x_speed;
+//   this.y += this.y_speed;
+// }
+
 // function detectPaddleHitPlayer() {
 //     if(ball.x <= playerHuman.x + playerHuman.width) {
 //         ball.x_speed = -ball.x_speed
@@ -171,8 +181,16 @@ function detectPaddleHitPlayer() {
 // have computer paddle follow the y position of the ball
 
 function computerAI() {
-  playerComputer.y = ball.y - 40;
+
+
+
+
+
+
+
+
 }
+
 function checkForPointComputer() {
   if (ball.x <= 0) {
     computerScore++;
@@ -182,12 +200,13 @@ function checkForPointComputer() {
     cNumber++;
     computerScoreDisplay.innerHTML = cNumber;
   }
+  console.log(computerScore)
   
 }
 
 function checkForPointHuman() {
-  if (ball.x < 696) {
-    playerScore = +1;
+  if (ball.x >= 696) {
+    playerScore++;
     ball.y = 294;
     ball.x = 350;
     pNumber = playerScoreDisplay.innerHTML
@@ -216,17 +235,23 @@ function howToPlay() {
 //   ball.x_speed = -6
 // }
 
-function checkWinComputer() {
-  if (computerScore = 4) {
+function checkWin() {
+  if (computerScore === 4 || playerScore === 4) {
     gameStatus = false;
     computerScore = 0;
     playerScore = 0;
     computerScoreDisplay.innerHTML = 0;
     playerScoreDisplay.innerHTML = 0;
-    console.log(computerScore);
   }
+  return;
 }
-// use set timeout for delay
+
+// function pauseGame() {
+//   if (gameStatus = false) {
+
+
+//   }
+// }
 
 
 
