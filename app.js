@@ -28,7 +28,7 @@ class Paddle {
     this.width = width;
     this.height = height;
     this.x_speed = 0;
-    this.y_speed = 1;
+    this.y_speed = 0;
   }
   render() {
     ctx.fillStyle = this.color;
@@ -68,9 +68,16 @@ let ball = new Ball(350, 294, "slategrey", 12, 12);
 
 document.addEventListener("keydown", function (evt) {
   if (evt.key === "w") {
-    playerHuman.y -= 25;
+    playerHuman.y_speed =-5
   } else if (evt.key === "s") {
-    playerHuman.y += 25;
+    playerHuman.y_speed = 5
+  }
+});
+document.addEventListener("keyup", function (evt) {
+  if (evt.key === "w") {
+    playerHuman.y_speed = 0
+  } else if (evt.key === "s") {
+    playerHuman.y_speed = 0
   }
 });
 
@@ -88,7 +95,8 @@ function rePaint() {
   detectBallBounce();
   checkForPointComputer();
   checkWinComputer();
-  ball.update()
+  ball.updateBall()
+  playerHuman.update()
 }
 requestAnimationFrame(rePaint);
 
@@ -110,11 +118,19 @@ function detectWallCollisionComputer() {
   }
 }
 
-let update = function () {
-  ball.update();
+let updateBall = function () {
+  ball.updateBall();
+};
+let updateHuman = function () {
+  playerHuman.update();
 };
 
-ball.update = function () {
+ball.updateBall = function () {
+  this.x += this.x_speed;
+  this.y += this.y_speed;
+};
+
+playerHuman.update = function () {
   this.x += this.x_speed;
   this.y += this.y_speed;
 };
