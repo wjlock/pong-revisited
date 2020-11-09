@@ -7,6 +7,7 @@ const playerScoreDisplay = document.getElementById('player-score');
 const computerScoreDisplay = document.getElementById('computer-score');
 const playButton = document.getElementById('play-button');
 const statusDisplay = document.getElementById('status');
+const resetButton = document.getElementById('reset-button');
 
 // syncing canvas's internal height/width
 const computedStyle = getComputedStyle(game);
@@ -181,8 +182,6 @@ function checkForPointComputer() {
       return;
     }
   }
-  console.log(computerScore)
-  
 }
 
 function checkForPointHuman() {
@@ -250,4 +249,22 @@ playButton.addEventListener('click',launchBall);
 
 function randomNumber(min, max) {
   return Math.random() * (max - min) + min;
+}
+resetButton.addEventListener('click',resetBoard);
+
+function resetBoard() {
+  ball.y = 294
+  ball.x = 350
+  computerScore = 0
+  playerScore = 0
+  computerScoreDisplay.innerHTML = 0;
+  playerScoreDisplay.innerHTML = 0;
+  lastRoundWinner = 'computer';
+  gameStatus = false;
+  playerHuman.x = 15;
+  playerHuman.y = 250;
+  playerComputer.x = 675;
+  playerComputer.y = 250;
+  ball.y_speed = 0;
+  ball.x_speed = 0;
 }

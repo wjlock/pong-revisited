@@ -13,7 +13,7 @@
                           "btm-left btm-right btm-right";
     }
     
-#how-to-play, #play-button, .popup {
+#how-to-play, #play-button, #reset-button, .popup {
     display: inline-flex;
     justify-content: center;
     padding: 10px;
@@ -48,6 +48,12 @@ main {
     grid-area: game;
 }
 #play-button {
+    cursor: pointer;
+    font-family: 'Indie Flower', cursive;
+    border: solid 1px slategray;
+    border-radius: .5em;
+}
+#reset-button {
     cursor: pointer;
     font-family: 'Indie Flower', cursive;
     border: solid 1px slategray;
