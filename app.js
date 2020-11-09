@@ -2,6 +2,7 @@ const game = document.querySelector("#game");
 let gameStatus = false;
 let playerScore = 0;
 let computerScore = 0;
+let lastRoundWinner = 'computer';
 const playerScoreDisplay = document.getElementById('player-score');
 const computerScoreDisplay = document.getElementById('computer-score');
 const playButton = document.getElementById('play-button');
@@ -191,6 +192,7 @@ function checkForPointComputer() {
     ball.x = 350;
     ball.y_speed = 0;
     ball.x_speed = 0;
+    lastRoundWinner = 'computer';
     setTimeout(launchBall,1500)
     computerScore++;
     cNumber = computerScoreDisplay.innerHTML
@@ -204,9 +206,13 @@ function checkForPointComputer() {
 
 function checkForPointHuman() {
   if (ball.x >= 696) {
-    playerScore++;
     ball.y = 294;
     ball.x = 350;
+    ball.y_speed = 0;
+    ball.x_speed = 0;
+    lastRoundWinner = 'player';
+    setTimeout(launchBall,1500);
+    playerScore++;
     pNumber = playerScoreDisplay.innerHTML
     pNumber++;
     playerScoreDisplay.innerHTML = pNumber;
@@ -231,17 +237,26 @@ function howToPlay() {
 function checkWin() {
   if (computerScore === 4 || playerScore === 4) {
     gameStatus = false;
-    computerScore = 0;
-    playerScore = 0;
-    computerScoreDisplay.innerHTML = 0;
-    playerScoreDisplay.innerHTML = 0;
+    // computerScore = 0;
+    // playerScore = 0;
+    // computerScoreDisplay.innerHTML = 0;
+    // playerScoreDisplay.innerHTML = 0;
+    ball.y = 294
+    ball.x = 350
   }
   return;
 }
 
 function launchBall() {
-  ball.y_speed = -3;
-  ball.x_speed = -6;
+  ball.y_speed = randomNumber(-3, 3)
+  if (lastRoundWinner === 'computer') {
+    ball.x_speed = -6
+  } else {
+    ball.x_speed = 6
+  }
 }
 
 playButton.addEventListener('click',launchBall);
+function randomNumber(min, max) {
+  return Math.random() * (max - min) + min;
+}
