@@ -44,8 +44,8 @@ class Ball {
     this.color = color;
     this.width = width;
     this.height = height;
-    this.x_speed = -6;
-    this.y_speed = -3;
+    this.x_speed = 0;
+    this.y_speed = 0;
   }
   render() {
     ctx.fillStyle = this.color;
@@ -183,22 +183,20 @@ function detectPaddleHitPlayer() {
 function computerAI() {
 
 
-
-
-
-
-
-
 }
 
 function checkForPointComputer() {
   if (ball.x <= 0) {
-    computerScore++;
     ball.y = 294;
     ball.x = 350;
+    ball.y_speed = 0;
+    ball.x_speed = 0;
+    setTimeout(launchBall,1500)
+    computerScore++;
     cNumber = computerScoreDisplay.innerHTML
     cNumber++;
     computerScoreDisplay.innerHTML = cNumber;
+
   }
   console.log(computerScore)
   
@@ -230,11 +228,6 @@ function howToPlay() {
   popup.classList.toggle("show");
 }
 
-// function startGame() {
-//   ball.y_speed = -3
-//   ball.x_speed = -6
-// }
-
 function checkWin() {
   if (computerScore === 4 || playerScore === 4) {
     gameStatus = false;
@@ -246,16 +239,9 @@ function checkWin() {
   return;
 }
 
-// function pauseGame() {
-//   if (gameStatus = false) {
+function launchBall() {
+  ball.y_speed = -3;
+  ball.x_speed = -6;
+}
 
-
-//   }
-// }
-
-
-
-
-
-
-
+playButton.addEventListener('click',launchBall);
