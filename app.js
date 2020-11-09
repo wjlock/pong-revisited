@@ -2,12 +2,12 @@ const game = document.querySelector("#game");
 let gameStatus = false;
 let playerScore = 0;
 let computerScore = 0;
-let lastRoundWinner = 'computer';
-const playerScoreDisplay = document.getElementById('player-score');
-const computerScoreDisplay = document.getElementById('computer-score');
-const playButton = document.getElementById('play-button');
-const statusDisplay = document.getElementById('status');
-const resetButton = document.getElementById('reset-button');
+let lastRoundWinner = "computer";
+const playerScoreDisplay = document.getElementById("player-score");
+const computerScoreDisplay = document.getElementById("computer-score");
+const playButton = document.getElementById("play-button");
+const statusDisplay = document.getElementById("status");
+const resetButton = document.getElementById("reset-button");
 
 // syncing canvas's internal height/width
 const computedStyle = getComputedStyle(game);
@@ -53,25 +53,28 @@ class Ball {
   }
 }
 
+// Render paddles and ball
 let playerHuman = new Paddle(15, 250, "slategrey", 10, 100);
 let playerComputer = new Paddle(675, 250, "slategrey", 10, 100);
 let ball = new Ball(350, 294, "slategrey", 12, 12);
 
+// Handle player paddle movement
 document.addEventListener("keydown", function (evt) {
   if (evt.key === "w") {
-    playerHuman.y_speed =-5
+    playerHuman.y_speed = -5;
   } else if (evt.key === "s") {
-    playerHuman.y_speed = 5
+    playerHuman.y_speed = 5;
   }
 });
 document.addEventListener("keyup", function (evt) {
   if (evt.key === "w") {
-    playerHuman.y_speed = 0
+    playerHuman.y_speed = 0;
   } else if (evt.key === "s") {
-    playerHuman.y_speed = 0
+    playerHuman.y_speed = 0;
   }
 });
 
+// Repaint Function
 function rePaint() {
   ctx.clearRect(0, 0, game.width, game.height);
   playerHuman.render();
@@ -87,11 +90,12 @@ function rePaint() {
   checkForPointHuman();
   checkForPointComputer();
   checkWin();
-  ball.updateBall()
-  playerHuman.update()
+  ball.updateBall();
+  playerHuman.update();
 }
 requestAnimationFrame(rePaint);
 
+// Check if the player paddle hits the upper or lower walls of the canvas
 function detectWallCollisionHuman() {
   if (playerHuman.y <= 0) {
     playerHuman.y = 0;
@@ -100,6 +104,7 @@ function detectWallCollisionHuman() {
   }
 }
 
+// Check if the computer paddle hits the upper or lower walls of the canvas
 function detectWallCollisionComputer() {
   if (playerComputer.y <= 0) {
     playerComputer.y = 0;
@@ -125,6 +130,7 @@ playerHuman.update = function () {
   this.y += this.y_speed;
 };
 
+// Collision detection for computer paddle/ball
 function detectPaddleHitComputer() {
   let collisionPointBottom = playerComputer.y + playerComputer.height;
   let collisionPointTop = playerComputer.y;
@@ -135,10 +141,11 @@ function detectPaddleHitComputer() {
     ballPos >= collisionPointTop
   ) {
     ball.x_speed = -ball.x_speed;
-    ball.y_speed = ball.y_speed + playerComputer.y_speed/2
+    ball.y_speed = ball.y_speed + playerComputer.y_speed / 2;
   }
 }
 
+// Collision detection for player paddle/ball
 function detectPaddleHitPlayer() {
   let collisionPointBottom = playerHuman.y + playerHuman.height;
   let collisionPointTop = playerHuman.y;
@@ -148,22 +155,22 @@ function detectPaddleHitPlayer() {
     ballPos <= collisionPointBottom &&
     ballPos >= collisionPointTop
   ) {
-    ball.x_speed = -ball.x_speed 
-    ball.y_speed = ball.y_speed + playerHuman.y_speed/2
+    ball.x_speed = -ball.x_speed;
+    ball.y_speed = ball.y_speed + playerHuman.y_speed / 2;
   }
 }
 
+// Computer AI!
 function computerAI() {
-  if (playerComputer.y > ball.y - (playerComputer.height / 2)) {
+  if (playerComputer.y > ball.y - playerComputer.height / 2) {
     if (ball.x > 0) playerComputer.y -= playerComputer.speed / 1.5;
     else playerComputer.y -= playerComputer.speed / 4;
   }
-  if (playerComputer.y < ball.y - (playerComputer.height / 2)) {
+  if (playerComputer.y < ball.y - playerComputer.height / 2) {
     if (ball.x > 0) playerComputer.y += playerComputer.speed / 1.5;
     else playerComputer.y += playerComputer.speed / 4;
   }
-
-  }
+}
 
 function checkForPointComputer() {
   if (ball.x <= 0) {
@@ -171,13 +178,13 @@ function checkForPointComputer() {
     ball.x = 350;
     ball.y_speed = 0;
     ball.x_speed = 0;
-    lastRoundWinner = 'computer';
+    lastRoundWinner = "computer";
     computerScore++;
-    cNumber = computerScoreDisplay.innerHTML
+    cNumber = computerScoreDisplay.innerHTML;
     cNumber++;
     computerScoreDisplay.innerHTML = cNumber;
     if (computerScore <= 3 && playerScore <= 3) {
-      setTimeout(launchBall,1500)
+      setTimeout(launchBall, 1500);
     } else {
       return;
     }
@@ -190,13 +197,13 @@ function checkForPointHuman() {
     ball.x = 350;
     ball.y_speed = 0;
     ball.x_speed = 0;
-    lastRoundWinner = 'player';
+    lastRoundWinner = "player";
     playerScore++;
-    pNumber = playerScoreDisplay.innerHTML
+    pNumber = playerScoreDisplay.innerHTML;
     pNumber++;
     playerScoreDisplay.innerHTML = pNumber;
     if (computerScore <= 3 && playerScore <= 3) {
-      setTimeout(launchBall,1500);
+      setTimeout(launchBall, 1500);
     } else {
       return;
     }
@@ -207,59 +214,67 @@ function detectBallBounce() {
     ball.y_speed = -ball.y_speed;
   }
 }
+// Handle pop-up for "how to play"
 function howToPlay() {
   var popup = document.getElementById("myPopup");
   popup.classList.toggle("show");
 }
 
+//check for win condition
 function checkWin() {
   if (computerScore === 4 || playerScore === 4) {
     gameStatus = false;
     ball.y = 294;
     ball.x = 350;
-    statusDisplay.innerHTML = lastRoundWinner + " wins! Click play game at the bottom of the screen to start a new game.";
+    statusDisplay.innerHTML =
+      lastRoundWinner +
+      " wins! Click play game at the bottom of the screen to start a new game.";
   }
   if (computerScore === 0 && playerScore === 0) {
-    statusDisplay.innerHTML = "Click Play Game to start!"
+    statusDisplay.innerHTML = "Click Play Game to start!";
   }
   if (gameStatus === true) {
-    statusDisplay.innerHTML = "Have fun!"
+    statusDisplay.innerHTML = "Have fun!";
   }
   return;
 }
 
+//Handle ball launch
 function launchBall() {
-  ball.y_speed = randomNumber(-3, 3)
+  ball.y_speed = randomNumber(-3, 3);
   gameStatus = true;
   if (computerScore === 4 || playerScore === 4) {
-    computerScore = 0
-    playerScore = 0
+    computerScore = 0;
+    playerScore = 0;
     computerScoreDisplay.innerHTML = 0;
     playerScoreDisplay.innerHTML = 0;
-    lastRoundWinner = 'computer';
+    lastRoundWinner = "computer";
   }
-  if (lastRoundWinner === 'computer') {
-    ball.x_speed = -6
+  if (lastRoundWinner === "computer") {
+    ball.x_speed = -6;
   } else {
-    ball.x_speed = 6
+    ball.x_speed = 6;
   }
 }
 
-playButton.addEventListener('click',launchBall);
+// Handle play button click
+playButton.addEventListener("click", launchBall);
 
+// randomize ball launch
 function randomNumber(min, max) {
   return Math.random() * (max - min) + min;
 }
-resetButton.addEventListener('click',resetBoard);
+resetButton.addEventListener("click", resetBoard);
 
+// handle resetting the board
 function resetBoard() {
-  ball.y = 294
-  ball.x = 350
-  computerScore = 0
-  playerScore = 0
+  ball.y = 294;
+  ball.x = 350;
+  computerScore = 0;
+  playerScore = 0;
   computerScoreDisplay.innerHTML = 0;
   playerScoreDisplay.innerHTML = 0;
-  lastRoundWinner = 'computer';
+  lastRoundWinner = "computer";
   gameStatus = false;
   playerHuman.x = 15;
   playerHuman.y = 250;
