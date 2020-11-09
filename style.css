@@ -16,9 +16,11 @@
 #how-to-play, #play-button, .popup {
     display: inline-flex;
     justify-content: center;
+    padding: 10px;
     align-items: center;
-    background-color: #42c8f5;
     font-family: 'Indie Flower', cursive;
+    font-size: x-large;
+    font-weight: bold;
 }
 
 h2 {
@@ -48,18 +50,22 @@ main {
 #play-button {
     cursor: pointer;
     font-family: 'Indie Flower', cursive;
+    border: solid 1px slategray;
+    border-radius: .5em;
 }
 /* Popup container */
 .popup {
     position: relative;
     display: inline-block;
     cursor: pointer;
+    border: solid 1px slategray;
+    border-radius: .5em;
   }
   
   /* The actual popup (appears on top) */
   .popup .popuptext {
     visibility: hidden;
-    width: 200px;
+    width: 350px;
     background-color: #42c8f5;
     color: black;
     text-align: center;
@@ -70,7 +76,7 @@ main {
     z-index: 1;
     bottom: 370px;
     left: 82%;
-    margin-left: -80px;
+    margin-left: -150px;
   }
   
   /* Popup arrow */
@@ -112,10 +118,15 @@ main {
 .scores {
     display: flex;
     justify-content: center;
-    padding: 10px;
+    padding: 5px;
 
 }
 .score-computer {
     display: flex;
     justify-content: center;
     padding: 10px;
+}
+.status {
+    color: crimson;
+    font-weight: bolder;
+}

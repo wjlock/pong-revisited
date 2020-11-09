@@ -6,10 +6,7 @@ let lastRoundWinner = 'computer';
 const playerScoreDisplay = document.getElementById('player-score');
 const computerScoreDisplay = document.getElementById('computer-score');
 const playButton = document.getElementById('play-button');
-
-// playButton.addEventListener('click', startGame);
-
-
+const statusDisplay = document.getElementById('status');
 
 // syncing canvas's internal height/width
 const computedStyle = getComputedStyle(game);
@@ -58,15 +55,6 @@ class Ball {
 let playerHuman = new Paddle(15, 250, "slategrey", 10, 100);
 let playerComputer = new Paddle(675, 250, "slategrey", 10, 100);
 let ball = new Ball(350, 294, "slategrey", 12, 12);
-// playerHuman.render()
-// playerComputer.render()
-// ball.render()
-
-// document.getElementById('play-button').addEventListener('click', function() {
-//     playerComputer.render()
-//     playerHuman.render()
-//     ball.render()
-// })
 
 document.addEventListener("keydown", function (evt) {
   if (evt.key === "w") {
@@ -100,7 +88,6 @@ function rePaint() {
   checkWin();
   ball.updateBall()
   playerHuman.update()
-  // playerComputer.updateComputer()
 }
 requestAnimationFrame(rePaint);
 
@@ -111,8 +98,6 @@ function detectWallCollisionHuman() {
     playerHuman.y = 500;
   }
 }
-
-//try to consolidate these two functions
 
 function detectWallCollisionComputer() {
   if (playerComputer.y <= 0) {
@@ -166,9 +151,6 @@ function detectPaddleHitPlayer() {
     ball.y_speed = ball.y_speed + playerHuman.y_speed/2
   }
 }
-
-// automation for computer paddle
-// have computer paddle follow the y position of the ball
 
 function computerAI() {
   if (playerComputer.y > ball.y - (playerComputer.height / 2)) {
@@ -226,12 +208,6 @@ function detectBallBounce() {
     ball.y_speed = -ball.y_speed;
   }
 }
-
-
-// increment score by one until a player reaches 4 points, then reset game,
-// Add how to play and play buttons
-// additional styling
-
 function howToPlay() {
   var popup = document.getElementById("myPopup");
   popup.classList.toggle("show");
@@ -240,14 +216,22 @@ function howToPlay() {
 function checkWin() {
   if (computerScore === 4 || playerScore === 4) {
     gameStatus = false;
-    ball.y = 294
-    ball.x = 350
+    ball.y = 294;
+    ball.x = 350;
+    statusDisplay.innerHTML = lastRoundWinner + " wins! Click play game at the bottom of the screen to start a new game.";
+  }
+  if (computerScore === 0 && playerScore === 0) {
+    statusDisplay.innerHTML = "Click Play Game to start!"
+  }
+  if (gameStatus === true) {
+    statusDisplay.innerHTML = "Have fun!"
   }
   return;
 }
 
 function launchBall() {
   ball.y_speed = randomNumber(-3, 3)
+  gameStatus = true;
   if (computerScore === 4 || playerScore === 4) {
     computerScore = 0
     playerScore = 0
@@ -263,6 +247,7 @@ function launchBall() {
 }
 
 playButton.addEventListener('click',launchBall);
+
 function randomNumber(min, max) {
   return Math.random() * (max - min) + min;
 }
