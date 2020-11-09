@@ -30,6 +30,7 @@ class Paddle {
     this.height = height;
     this.x_speed = 0;
     this.y_speed = 0;
+    this.speed = 5.5;
   }
   render() {
     ctx.fillStyle = this.color;
@@ -170,9 +171,16 @@ function detectPaddleHitPlayer() {
 // have computer paddle follow the y position of the ball
 
 function computerAI() {
-  playerComputer.y = ball.y -40;
+  if (playerComputer.y > ball.y - (playerComputer.height / 2)) {
+    if (ball.x > 0) playerComputer.y -= playerComputer.speed / 1.5;
+    else playerComputer.y -= playerComputer.speed / 4;
+  }
+  if (playerComputer.y < ball.y - (playerComputer.height / 2)) {
+    if (ball.x > 0) playerComputer.y += playerComputer.speed / 1.5;
+    else playerComputer.y += playerComputer.speed / 4;
+  }
 
-}
+  }
 
 function checkForPointComputer() {
   if (ball.x <= 0) {
@@ -245,6 +253,7 @@ function launchBall() {
     playerScore = 0
     computerScoreDisplay.innerHTML = 0;
     playerScoreDisplay.innerHTML = 0;
+    lastRoundWinner = 'computer';
   }
   if (lastRoundWinner === 'computer') {
     ball.x_speed = -6
@@ -256,4 +265,31 @@ function launchBall() {
 playButton.addEventListener('click',launchBall);
 function randomNumber(min, max) {
   return Math.random() * (max - min) + min;
+}
+
+
+
+
+
+if (this.paddle.y > this.ball.y - (this.paddle.height / 2)) {
+  if (this.ball.moveX === DIRECTION.RIGHT) this.paddle.y -= this.paddle.speed / 1.5;
+  else this.paddle.y -= this.paddle.speed / 4;
+}
+if (this.paddle.y < this.ball.y - (this.paddle.height / 2)) {
+  if (this.ball.moveX === DIRECTION.RIGHT) this.paddle.y += this.paddle.speed / 1.5;
+  else this.paddle.y += this.paddle.speed / 4;
+}
+
+// Handle paddle (AI) wall collision
+if (this.paddle.y >= this.canvas.height - this.paddle.height) this.paddle.y = this.canvas.height - this.paddle.height;
+else if (this.paddle.y <= 0) this.paddle.y = 0;
+
+// Handle Player-Ball collisions
+if (this.ball.x - this.ball.width <= this.player.x && this.ball.x >= this.player.x - this.player.width) {
+  if (this.ball.y <= this.player.y + this.player.height && this.ball.y + this.ball.height >= this.player.y) {
+    this.ball.x = (this.player.x + this.ball.width);
+    this.ball.moveX = DIRECTION.RIGHT;
+
+    beep1.play();
+  }
 }
