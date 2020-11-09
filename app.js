@@ -138,19 +138,6 @@ playerHuman.update = function () {
   this.y += this.y_speed;
 };
 
-// let updateComputer = function () {
-//   playerComputer.updateComputer()
-// }
-// playerComputer.updateComputer = function() {
-//   this.x += this.x_speed;
-//   this.y += this.y_speed;
-// }
-
-// function detectPaddleHitPlayer() {
-//     if(ball.x <= playerHuman.x + playerHuman.width) {
-//         ball.x_speed = -ball.x_speed
-//     }
-// }
 function detectPaddleHitComputer() {
   let collisionPointBottom = playerComputer.y + playerComputer.height;
   let collisionPointTop = playerComputer.y;
@@ -161,7 +148,7 @@ function detectPaddleHitComputer() {
     ballPos >= collisionPointTop
   ) {
     ball.x_speed = -ball.x_speed;
-    // ball.y_speed = -ball.y_speed;
+    ball.y_speed = ball.y_speed + playerComputer.y_speed/2
   }
 }
 
@@ -174,7 +161,8 @@ function detectPaddleHitPlayer() {
     ballPos <= collisionPointBottom &&
     ballPos >= collisionPointTop
   ) {
-    ball.x_speed = -ball.x_speed -playerHuman.x_speed;
+    ball.x_speed = -ball.x_speed 
+    ball.y_speed = ball.y_speed + playerHuman.y_speed/2
   }
 }
 
@@ -182,7 +170,7 @@ function detectPaddleHitPlayer() {
 // have computer paddle follow the y position of the ball
 
 function computerAI() {
-
+  playerComputer.y = ball.y -40;
 
 }
 
@@ -193,12 +181,15 @@ function checkForPointComputer() {
     ball.y_speed = 0;
     ball.x_speed = 0;
     lastRoundWinner = 'computer';
-    setTimeout(launchBall,1500)
     computerScore++;
     cNumber = computerScoreDisplay.innerHTML
     cNumber++;
     computerScoreDisplay.innerHTML = cNumber;
-
+    if (computerScore <= 3 && playerScore <= 3) {
+      setTimeout(launchBall,1500)
+    } else {
+      return;
+    }
   }
   console.log(computerScore)
   
@@ -211,11 +202,15 @@ function checkForPointHuman() {
     ball.y_speed = 0;
     ball.x_speed = 0;
     lastRoundWinner = 'player';
-    setTimeout(launchBall,1500);
     playerScore++;
     pNumber = playerScoreDisplay.innerHTML
     pNumber++;
     playerScoreDisplay.innerHTML = pNumber;
+    if (computerScore <= 3 && playerScore <= 3) {
+      setTimeout(launchBall,1500);
+    } else {
+      return;
+    }
   }
 }
 function detectBallBounce() {
@@ -237,10 +232,6 @@ function howToPlay() {
 function checkWin() {
   if (computerScore === 4 || playerScore === 4) {
     gameStatus = false;
-    // computerScore = 0;
-    // playerScore = 0;
-    // computerScoreDisplay.innerHTML = 0;
-    // playerScoreDisplay.innerHTML = 0;
     ball.y = 294
     ball.x = 350
   }
@@ -249,6 +240,12 @@ function checkWin() {
 
 function launchBall() {
   ball.y_speed = randomNumber(-3, 3)
+  if (computerScore === 4 || playerScore === 4) {
+    computerScore = 0
+    playerScore = 0
+    computerScoreDisplay.innerHTML = 0;
+    playerScoreDisplay.innerHTML = 0;
+  }
   if (lastRoundWinner === 'computer') {
     ball.x_speed = -6
   } else {
