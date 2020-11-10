@@ -28,7 +28,7 @@ class Paddle {
     this.height = height;
     this.x_speed = 0;
     this.y_speed = 0;
-    this.speed = 5.5;
+    this.speed = 5.7;
   }
   render() {
     ctx.fillStyle = this.color;
@@ -83,8 +83,7 @@ function rePaint() {
   requestAnimationFrame(rePaint);
   detectWallCollisionHuman();
   detectWallCollisionComputer();
-  detectPaddleHitPlayer();
-  detectPaddleHitComputer();
+  detectPaddleHit();
   computerAI();
   detectBallBounce();
   checkForPoint();
@@ -130,35 +129,29 @@ playerHuman.update = function () {
 };
 
 // Collision detection for computer paddle/ball
-function detectPaddleHitComputer() {
-  let collisionPointBottom = playerComputer.y + playerComputer.height;
-  let collisionPointTop = playerComputer.y;
+function detectPaddleHit() {
+  let collisionPointBottomComputer = playerComputer.y + playerComputer.height;
+  let collisionPointTopComputer = playerComputer.y;
   let ballPos = ball.y;
   if (
     ball.x >= playerComputer.x &&
-    ballPos <= collisionPointBottom &&
-    ballPos >= collisionPointTop
+    ballPos <= collisionPointBottomComputer &&
+    ballPos >= collisionPointTopComputer
   ) {
     ball.x_speed = -ball.x_speed;
     ball.y_speed = ball.y_speed + playerComputer.y_speed / 2;
   }
-}
-
-// Collision detection for player paddle/ball
-function detectPaddleHitPlayer() {
-  let collisionPointBottom = playerHuman.y + playerHuman.height;
-  let collisionPointTop = playerHuman.y;
-  let ballPos = ball.y;
+  let collisionPointBottomPlayer = playerHuman.y + playerHuman.height;
+  let collisionPointTopPlayer = playerHuman.y;
   if (
     ball.x <= playerHuman.x &&
-    ballPos <= collisionPointBottom &&
-    ballPos >= collisionPointTop
+    ballPos <= collisionPointBottomPlayer &&
+    ballPos >= collisionPointTopPlayer
   ) {
     ball.x_speed = -ball.x_speed;
     ball.y_speed = ball.y_speed + playerHuman.y_speed / 2;
   }
 }
-
 // Computer AI!
 function computerAI() {
   if (playerComputer.y > ball.y - playerComputer.height / 2) {
