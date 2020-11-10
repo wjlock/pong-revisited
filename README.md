@@ -41,3 +41,6 @@ Items to add in the future, in no particular order:
 | `launchBall` | launches the ball in a randow y direction based on last point scored|
 | `resetBoard` | Function to put board back to inital state after button click |
 
+## Technologies Used
+
+This project was built using HTML, CSS, and Javascript.
