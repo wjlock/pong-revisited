@@ -163,7 +163,7 @@ function computerAI() {
     else playerComputer.y += playerComputer.speed / 4;
   }
 }
-
+// Check for point scored
 function checkForPoint() {
   if (ball.x <= 0) {
     ball.y = 294;
@@ -198,6 +198,7 @@ function checkForPoint() {
     }
   }
 }
+// Detect ball bounce on edges of play space
 function detectBallBounce() {
   if (ball.y <= 0 || ball.y >= 588) {
     ball.y_speed = -ball.y_speed;

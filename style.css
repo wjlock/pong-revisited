@@ -109,3 +109,13 @@ main {
     color: whitesmoke;
     font-weight: bolder;
 }
+#player-score {
+    padding-left: 5px;
+    font-size: xx-large;
+    margin-top: 12px;
+}
+#computer-score {
+    padding-left: 5px;
+    font-size: xx-large;
+    margin-top: 12px;
+}
