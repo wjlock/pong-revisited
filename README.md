@@ -3,7 +3,7 @@
 
  # How to Play
 
-Using the 'W' and 'S' keys, move your paddle up and down. The person who scores a point 'serves' the next round. Try to apply spin by hitting the ball with your paddle moving. This maniulates the speed of the ball and makes it harder for your opponent to return. The game is played in a best of 7 format, so first to 4 points wins.
+Using the 'W' and 'S' keys, move your paddle up and down. The person who scores a point 'serves' the next round. Try to apply spin by hitting the ball with your paddle moving. This manipulates the speed of the ball and makes it harder for your opponent to return. The game is played in a best of 7 format, so first to 4 points wins.
 
 Click the "Play" button to get started. If you need to reset the table, click the 'reset' button. The score totals are at the bottom of the page.
 
