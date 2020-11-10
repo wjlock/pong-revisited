@@ -2,7 +2,7 @@ const game = document.querySelector("#game");
 let gameStatus = false;
 let playerScore = 0;
 let computerScore = 0;
-let lastRoundWinner = "computer";
+let lastRoundWinner = "Computer";
 const playerScoreDisplay = document.getElementById("player-score");
 const computerScoreDisplay = document.getElementById("computer-score");
 const playButton = document.getElementById("play-button");
@@ -58,7 +58,7 @@ let playerHuman = new Paddle(15, 250, "slategrey", 10, 100);
 let playerComputer = new Paddle(675, 250, "slategrey", 10, 100);
 let ball = new Ball(350, 294, "slategrey", 12, 12);
 
-// Handle player paddle movement
+// Handle player paddle movement, event listeners
 document.addEventListener("keydown", function (evt) {
   if (evt.key === "w") {
     playerHuman.y_speed = -5;
@@ -73,6 +73,9 @@ document.addEventListener("keyup", function (evt) {
     playerHuman.y_speed = 0;
   }
 });
+playButton.addEventListener("click", launchBall);
+resetButton.addEventListener("click", resetBoard);
+
 
 // Repaint Function
 function rePaint() {
@@ -170,7 +173,7 @@ function checkForPoint() {
     ball.x = 350;
     ball.y_speed = 0;
     ball.x_speed = 0;
-    lastRoundWinner = "computer";
+    lastRoundWinner = "Computer";
     computerScore++;
     cNumber = computerScoreDisplay.innerHTML;
     cNumber++;
@@ -186,7 +189,7 @@ function checkForPoint() {
     ball.x = 350;
     ball.y_speed = 0;
     ball.x_speed = 0;
-    lastRoundWinner = "player";
+    lastRoundWinner = "Player";
     playerScore++;
     pNumber = playerScoreDisplay.innerHTML;
     pNumber++;
@@ -238,23 +241,18 @@ function launchBall() {
     playerScore = 0;
     computerScoreDisplay.innerHTML = 0;
     playerScoreDisplay.innerHTML = 0;
-    lastRoundWinner = "computer";
+    lastRoundWinner = "Computer";
   }
-  if (lastRoundWinner === "computer") {
+  if (lastRoundWinner === "Computer") {
     ball.x_speed = -6;
   } else {
     ball.x_speed = 6;
   }
 }
-
-// Handle play button click
-playButton.addEventListener("click", launchBall);
-
 // randomize ball launch
 function randomNumber(min, max) {
   return Math.random() * (max - min) + min;
 }
-resetButton.addEventListener("click", resetBoard);
 
 // handle resetting the board
 function resetBoard() {
@@ -264,7 +262,7 @@ function resetBoard() {
   playerScore = 0;
   computerScoreDisplay.innerHTML = 0;
   playerScoreDisplay.innerHTML = 0;
-  lastRoundWinner = "computer";
+  lastRoundWinner = "Computer";
   gameStatus = false;
   playerHuman.x = 15;
   playerHuman.y = 250;
